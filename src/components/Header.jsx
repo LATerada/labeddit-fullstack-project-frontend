@@ -10,7 +10,7 @@ export const Header = () => {
   }
 
   return (
-    <header className="grid grid-cols-3 items-center bg-gray-light h-12">
+    <header className="grid grid-cols-3 items-center bg-gray-header h-12">
       {location.pathname.includes("comments") ? (
         <img
           className="text-gray-mid w-8 ml-7"
