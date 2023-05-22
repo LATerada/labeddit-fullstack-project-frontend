@@ -1,1 +1,0 @@
-# labeddit-fullstack-project-frontend
