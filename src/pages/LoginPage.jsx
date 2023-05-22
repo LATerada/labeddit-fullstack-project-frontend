@@ -43,17 +43,23 @@ const LoginPage = () => {
             onChange={onChangeInputs}
           ></input>
         </form>
-        <Button
-          type="submit"
-          text={"Login"}
-          round={"rounded-full"}
-          bg={"gradient"}
-          onClick={onSubmit}
-        ></Button>
-        <div className=" bg-gradient-to-r from-rose to-orange-border w-80 h-px my-4"></div>
-        <Button text={"Signup!"} round={"rounded-full"} bg={"null"}>
+        <div className="w-screen flex justify-center">
           {" "}
-        </Button>
+          <Button
+            type="submit"
+            text={"Login"}
+            round={"rounded-full"}
+            bg={"gradient"}
+            onClick={onSubmit}
+          ></Button>
+        </div>
+
+        <div className=" bg-gradient-to-r from-rose to-orange-border w-80 h-px my-4"></div>
+        <div className="w-screen flex justify-center">
+          <Button text={"Signup!"} round={"rounded-full"} bg={"null"}>
+            {" "}
+          </Button>
+        </div>
       </div>
     </div>
   );
