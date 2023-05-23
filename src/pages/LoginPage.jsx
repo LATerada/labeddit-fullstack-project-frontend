@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { FormInput } from "../components/FormInput";
 import { useForm } from "../hooks/useForm";
+import logo from"../assets/labeddit-logo.svg"
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const LoginPage = () => {
   return (
     <div className="grid grid-rows-2 justify-center items-center bg-white h-screen w-screen">
       <div className="grid justify-items-center">
-        <img src="./labeddit-logo.svg" alt="labeddit logo" />
+        <img src={logo} alt="labeddit logo" />
         <h1 className="h-12 text-black font-bold text-4xl">LabEddit</h1>
         <h6 className="text-black font-light text-base">
           Labenu's Social Media Project

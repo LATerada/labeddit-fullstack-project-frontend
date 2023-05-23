@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import logo from"../assets/labeddit-logo.svg"
+import closeIcon from "../assets/close.svg"
 
 export const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,7 +16,7 @@ export const Header = () => {
       {location.pathname.includes("comments") ? (
         <img
           className="text-gray-mid w-8 ml-7"
-          src="./close.svg"
+          src={closeIcon}
           alt="close icon"
         />
       ) : (
@@ -22,7 +24,7 @@ export const Header = () => {
       )}
       <img
         className="col-start-2 justify-self-center w-7"
-        src="./labeddit-logo.svg"
+        src={logo}
         alt="logo"
       />
       {isLoggedIn ? (
