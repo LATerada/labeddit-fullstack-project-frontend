@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
+import { FormInput } from "../components/FormInput";
 import { useForm } from "../hooks/useForm";
 
 const LoginPage = () => {
@@ -10,9 +12,14 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true)
+
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(form);
+    setIsEmailValid(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email));
+    setIsPasswordValid(/^[0-9a-zA-Z$*&@#]{6,}$/.test(form.password))
   };
 
   return (
@@ -25,23 +32,33 @@ const LoginPage = () => {
         </h6>
       </div>
       <div className="flex flex-wrap justify-self-center justify-center pb-20">
-        <form onSubmit={onSubmit} className="pb-10">
-          <input
-            className="w-10/12 py-5 pl-4 mb-2 mx-8 placeholder:font-noto placeholder:font-normal border-gray-inputBorder border"
+        <form onSubmit={onSubmit} className="w-10/12 pb-10">
+          <FormInput
             placeholder="E-mail"
             name="email"
             type="email"
             value={form.email}
             onChange={onChangeInputs}
-          ></input>
-          <input
-            className="w-10/12 py-5 pl-4 mx-8 placeholder:font-noto placeholder:font-normal  border-gray-inputBorder border"
-            placeholder="Password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={onChangeInputs}
-          ></input>
+            isValid={isEmailValid}
+          ></FormInput>
+          {isEmailValid ? (
+            ""
+          ) : (
+            <p className="w-10/12 mb-2 mx-8 text-red">Please insert a valid e-mail.</p>
+          )}
+          <FormInput
+           placeholder="Password"
+           name="password"
+           type="password"
+           value={form.password}
+           onChange={onChangeInputs}
+           isValid={isPasswordValid}>
+          </FormInput>
+              {isPasswordValid ? (
+            ""
+          ) : (
+            <p className="w-10/12 mb-2 mx-8 text-red">Please insert at least 6 caracters.</p>
+          )}
         </form>
         <div className="w-screen flex justify-center">
           {" "}
