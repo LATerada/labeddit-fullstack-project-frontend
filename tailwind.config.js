@@ -9,14 +9,15 @@ export default {
         mid: "#A3A3A3",
         inputBorder: "#D5D8DE",
         inputText: "#323941",
-        cardBg:"#FBFBFB",
-        cardBorder:"#E0E0E0"
+        cardBg: "#FBFBFB",
+        cardBorder: "#E0E0E0",
       },
       orange: {
         border: "#F9B24E",
         text: "#FE7E02",
       },
       rose: "#FF6489",
+      red: "#e11d48",
       white: "#FFFFFF",
     },
     fontFamily: {
