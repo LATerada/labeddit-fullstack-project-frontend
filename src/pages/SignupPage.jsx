@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { FormInput } from "../components/FormInput";
 import { useForm } from "../hooks/useForm";
 
 const SignupPage = () => {
-  const navigate = useNavigate();
-
   const { form, onChangeInputs, clearInputs } = useForm({
     name: "",
     email: "",
