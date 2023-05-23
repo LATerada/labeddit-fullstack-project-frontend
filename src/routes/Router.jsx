@@ -10,7 +10,7 @@ const Router = () => {
     <BrowserRouter>
       <Header/>
       <Routes>
-        <Route index path="/login" element={<LoginPage></LoginPage>}></Route>
+        <Route path="/login" element={<LoginPage></LoginPage>}></Route>
         <Route path="/signup" element={<SignupPage></SignupPage>}></Route>
         <Route path="/feed" element={<FeedPage></FeedPage>}></Route>
         <Route
