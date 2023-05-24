@@ -1,25 +1,31 @@
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/labeddit-logo.svg";
 import closeIcon from "../assets/close.svg";
-import { goToLoginPage } from "../routes/coordinator";
+import { goToFeedPage, goToLoginPage } from "../routes/coordinator";
+import AuthService from "../services/auth.services";
 
 export const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
+ 
   if (location.pathname === "/login") {
     return <></>;
   }
-  const logout = () => {};
+
+  const logout = () => {
+    const response = AuthService.logout();
+    console.log(response);
+    goToLoginPage(navigate);
+  };
+
   return (
-    <header className="grid grid-cols-3 items-center bg-gray-header h-12">
+    <div className="grid grid-cols-3 items-center bg-gray-header h-12">
       {location.pathname.includes("comments") ? (
         <img
           className="text-gray-mid w-8 ml-7"
           src={closeIcon}
           alt="close icon"
+          onClick={() => goToFeedPage(navigate)}
         />
       ) : (
         ""
@@ -29,10 +35,10 @@ export const Header = () => {
         src={logo}
         alt="logo"
       />
-      {isLoggedIn ? (
+      {!location.pathname.includes("signup") ? (
         <button
           className="pl-7 text-blue font-noto font-semibold"
-          onClick={logout()}
+          onClick={logout}
         >
           Logout
         </button>
@@ -44,6 +50,6 @@ export const Header = () => {
           Login
         </button>
       )}
-    </header>
+    </div>
   );
 };
