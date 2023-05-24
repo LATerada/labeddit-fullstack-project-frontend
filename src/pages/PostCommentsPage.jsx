@@ -80,7 +80,7 @@ const PostCommentsPage = () => {
           <PostCard
             post={postToRender}
             headers={headers}
-            fetchPost={fetchPost}
+            fetchPosts={fetchPost}
           />
         </div>
         <form onSubmit={onSubmit}>

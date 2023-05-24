@@ -7,7 +7,7 @@ import { goToPostCommentsPage } from "../routes/coordinator";
 import { useState } from "react";
 
 export const PostCard = (props) => {
-  const { post, headers, fetchPost} = props;
+  const { post, headers, fetchPosts} = props;
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   // const [interactedPosts, setInteractedPosts] = useState([]);
