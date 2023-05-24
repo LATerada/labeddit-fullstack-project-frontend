@@ -15,7 +15,7 @@ const getPosts = async (headers) => {
   return response;
 };
 
-const createPost = async (headers,body) => {
+const createPost = async (headers, body) => {
   const response = await axios
     .post(`${BASE_URL}/posts`, body, headers)
     .then((response) => {
@@ -29,9 +29,24 @@ const createPost = async (headers,body) => {
   return response;
 };
 
+const likeOrDislikePost = async (headers, body, id) => {
+  const response = await axios
+    .put(`${BASE_URL}/posts/${id}/like`, body, headers)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      console.log(error.response);
+      return error.response;
+    });
+  return response;
+};
+
 const UserService = {
   getPosts,
-  createPost
+  createPost,
+  likeOrDislikePost,
 };
 
 export default UserService;

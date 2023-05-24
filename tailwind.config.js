@@ -22,7 +22,8 @@ export default {
       },
       rose: "#FF6489",
       red: "#e11d48",
-      black:"#000000",
+      purple: "#8b5cf6",
+      black: "#000000",
       white: "#FFFFFF",
     },
     fontFamily: {

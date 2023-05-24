@@ -12,7 +12,10 @@ const FeedPage = () => {
   const [isPosting, setIsPosting] = useState(false);
   const [isPostValid, setIsPostValid] = useState(true);
   const [newPost, setNewPost] = useState(false);
-  const [textAreaErrorMessage, setTextAreaErrorMessage] = useState("Posts need to have at least 1 caracter.");
+  const [newLikeOrDislikePost, setNewLikeOrDislikePost] = useState(false);
+  const [textAreaErrorMessage, setTextAreaErrorMessage] = useState(
+    "Posts need to have at least 1 caracter."
+  );
   const token = localStorage.getItem("token");
   localStorage.getItem("token");
   const headers = {
@@ -35,19 +38,14 @@ const FeedPage = () => {
   };
 
   const onSubmit = async (event) => {
-    console.log(body);
-    console.log("clicou");
     setIsPosting(true);
     event.preventDefault();
-    // console.log(form);
 
     setIsPostValid(/.{1}/.test(form.postContent));
 
     if (/.{1}/.test(form.postContent)) {
       const response = await UserService.createPost(headers, body);
 
-
-      console.log(response);
       setNewPost(true);
     }
     setIsPosting(false);
@@ -57,11 +55,11 @@ const FeedPage = () => {
     fetchPosts();
   }, [newPost]);
 
-  console.log(isPostValid);
+  // console.log(isPostValid);
 
   if (isLoaded) {
     return (
-      <div className="grid justify-center w-full">
+      <div className="grid justify-center w-full pb-8">
         <form onSubmit={onSubmit}>
           <TextArea
             name="postContent"
@@ -86,7 +84,14 @@ const FeedPage = () => {
         ></Button>
         <div className=" bg-gradient-to-r from-rose to-orange-border w-80 h-px my-4"></div>
         {posts.map((post) => {
-          return <PostCard key={post.id} post={post}></PostCard>;
+          return (
+            <PostCard
+              key={post.id}
+              post={post}
+              headers={headers}
+              setNewLikeOrDislikePost={setNewLikeOrDislikePost}
+            ></PostCard>
+          );
         })}
       </div>
     );
