@@ -12,7 +12,7 @@ const FeedPage = () => {
   const [isPosting, setIsPosting] = useState(false);
   const [isPostValid, setIsPostValid] = useState(true);
   const [newPost, setNewPost] = useState(false);
-  const [newLikeOrDislikePost, setNewLikeOrDislikePost] = useState(false);
+  // const [newLikeOrDislikePost, setNewLikeOrDislikePost] = useState(false);
   const [textAreaErrorMessage, setTextAreaErrorMessage] = useState(
     "Posts need to have at least 1 caracter."
   );
@@ -89,7 +89,8 @@ const FeedPage = () => {
               key={post.id}
               post={post}
               headers={headers}
-              setNewLikeOrDislikePost={setNewLikeOrDislikePost}
+              fetchPosts={fetchPosts}
+              // setNewLikeOrDislikePost={setNewLikeOrDislikePost}
             ></PostCard>
           );
         })}

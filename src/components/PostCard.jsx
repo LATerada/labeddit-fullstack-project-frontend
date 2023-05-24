@@ -5,13 +5,12 @@ import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { goToPostCommentsPage } from "../routes/coordinator";
 import { useState } from "react";
-import { useEffect } from "react";
 
 export const PostCard = (props) => {
-  const { post, headers, setNewLikeOrDislikePost } = props;
+  const { post, headers, fetchPosts} = props;
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [interactedPosts, setInteractedPosts] = useState([]);
+  // const [interactedPosts, setInteractedPosts] = useState([]);
   const id = post.id;
   const navigate = useNavigate();
 
@@ -24,49 +23,54 @@ export const PostCard = (props) => {
       postId: id,
       like: like,
     };
-    console.log(interactedPosts);
+
     const response = await UserService.likeOrDislikePost(headers, body, id);
-    console.log(response);
-    if (response.status === 200) {
-      console.log(interactedPosts);
-      const alreadyInteract = interactedPosts.find(
-        (interactedPost) => interactedPost.postId === id
-      );
-      console.log(interactedPosts, likedOrDisliked);
-      console.log(alreadyInteract);
-      if (like === true) {
-        console.log("entrou like===true");
-        console.log(alreadyInteract);
-        if (alreadyInteract) {
-          if (alreadyInteract.like === true) {
-            setLiked(false);
-          } else {
-            setDisliked(false);
-            setLiked(true);
-          }
-        } else {
-          setInteractedPosts(...interactedPosts, likeOrDislikePost);
-          setLiked(true);
-        }
-      } else if (like === false) {
-        if (alreadyInteract) {
-          if (alreadyInteract.like === true) {
-            setLiked(false);
-            setDisliked(true);
-          } else {
-            setDisliked(false);
-          }
-        } else {
-          setInteractedPosts(...interactedPosts, likeOrDislikePost);
-          setDisliked(true);
-        }
-      }
-      setNewLikeOrDislikePost(true);
-      console.log(interactedPosts);
+
+    if(response.status === 200){
+      fetchPosts()
     }
+    // if (response.status === 200) {
+    //   const alreadyInteract = interactedPosts.find(
+    //     (interactedPost) => interactedPost.postId === id
+    //   );
+
+    //   if (like === true) {
+    //     if (alreadyInteract) {
+    //       if (alreadyInteract.like === true) {
+    //         setLiked(false);
+    //       } else {
+    //         setDisliked(false);
+    //         setLiked(true);
+    //       }
+    //     } else {
+    //       console.log("chegou aqui");
+    //       const newInteractedPosts = [...interactedPosts];
+    //       newInteractedPosts.push(likeOrDislikePost);
+    //       setInteractedPosts(newInteractedPosts);
+    //       console.log(interactedPosts);
+    //       setLiked(true);
+    //     }
+    //   } else if (like === false) {
+    //     if (alreadyInteract) {
+    //       if (alreadyInteract.like === true) {
+    //         setLiked(false);
+    //         setDisliked(true);
+    //       } else {
+    //         setDisliked(false);
+    //       }
+    //     } else {
+    //       const newInteractedPosts = [...interactedPosts];
+    //       newInteractedPosts.push(likeOrDislikePost);
+    //       setInteractedPosts(newInteractedPosts);
+    //       setDisliked(true);
+    //     }
+    //   }
+    //   setNewLikeOrDislikePost(true);
+    // }
   };
 
-  useEffect(() => {}, [liked, disliked]);
+
+  // useEffect(() => {}, [liked, disliked]);
 
   return (
     <div className="w-80 grid  border-gray-cardBorder border bg-gray-cardBg m-1.5 font-ibm px-2.5 py-2 rounded-xl">
