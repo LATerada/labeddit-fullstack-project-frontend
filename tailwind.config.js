@@ -2,9 +2,6 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    fontSize: {
-      xxs: ["9px", "9.5px"],
-    },
     colors: {
       blue: "#4088CB",
       gray: {
