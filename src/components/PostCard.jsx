@@ -1,22 +1,99 @@
-import like from "../assets/upArrow.svg";
-import dislike from "../assets/downArrow.svg";
-import comment from "../assets/comment.svg";
+import { LikeIcon } from "./LikeIcon";
+import { DislikeIcon } from "./DislikeIcon";
+import { CommentIcon } from "./CommentIcon";
+import UserService from "../services/user.service";
+import { useNavigate } from "react-router-dom";
+import { goToPostCommentsPage } from "../routes/coordinator";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export const PostCard = (props) => {
-  const { post } = props;
-  console.log(post);
+  const { post, headers, setNewLikeOrDislikePost } = props;
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false);
+  const [interactedPosts, setInteractedPosts] = useState([]);
+  const id = post.id;
+  const navigate = useNavigate();
+
+  const likeOrDislikePost = async (like) => {
+    const body = {
+      like: like,
+    };
+    const likedOrDisliked = {
+      headers,
+      postId: id,
+      like: like,
+    };
+    console.log(interactedPosts);
+    const response = await UserService.likeOrDislikePost(headers, body, id);
+    console.log(response);
+    if (response.status === 200) {
+      console.log(interactedPosts);
+      const alreadyInteract = interactedPosts.find(
+        (interactedPost) => interactedPost.postId === id
+      );
+      console.log(interactedPosts, likedOrDisliked);
+      console.log(alreadyInteract);
+      if (like === true) {
+        console.log("entrou like===true");
+        console.log(alreadyInteract);
+        if (alreadyInteract) {
+          if (alreadyInteract.like === true) {
+            setLiked(false);
+          } else {
+            setDisliked(false);
+            setLiked(true);
+          }
+        } else {
+          setInteractedPosts(...interactedPosts, likeOrDislikePost);
+          setLiked(true);
+        }
+      } else if (like === false) {
+        if (alreadyInteract) {
+          if (alreadyInteract.like === true) {
+            setLiked(false);
+            setDisliked(true);
+          } else {
+            setDisliked(false);
+          }
+        } else {
+          setInteractedPosts(...interactedPosts, likeOrDislikePost);
+          setDisliked(true);
+        }
+      }
+      setNewLikeOrDislikePost(true);
+      console.log(interactedPosts);
+    }
+  };
+
+  useEffect(() => {}, [liked, disliked]);
+
   return (
-    <div className="w-80 grid grid-rows-3 border-gray-cardBorder border bg-gray-cardBg m-1.5 font-ibm px-2.5 py-2 rounded-xl">
-      <p className="font-normal text-xs text-gray-inputPost">Send by {post.creator.name}</p>
-      <p className="flex flex-wrap font-normal text-lg text-black py-2">{post.postContent}</p>
-      <div  className="flex gap-2">
-        <button className="flex justify-center items-center border border-gray-cardBorder rounded-xl px-2 gap-4 h-7">
-          <img className="w-3.5" src={like}></img>
-          <span className="font-bold text-xxs">{post.likes - post.dislikes}</span>
-          <img className="w-3.5"s src={dislike}></img>
-        </button>
-        <button className="flex justify-center items-center border border-gray-cardBorder rounded-xl px-2 gap-4 h-7">
-          <img className="w-3.5" src={comment}></img>
+    <div className="w-80 grid  border-gray-cardBorder border bg-gray-cardBg m-1.5 font-ibm px-2.5 py-2 rounded-xl">
+      <p className="font-normal text-xs text-gray-inputPost max-h-7">
+        Send by {post.creator.name}
+      </p>
+      <p className="flex flex-wrap font-normal text-lg text-black py-4">
+        {post.postContent}
+      </p>
+      <div className="flex self-end gap-2 max-h-7">
+        {" "}
+        <div className="flex justify-center items-center border border-gray-cardBorder rounded-xl px-2 gap-3 h-7">
+          <button onClick={() => likeOrDislikePost(true)}>
+            <LikeIcon liked={liked} />
+          </button>
+          <span className="font-bold text-xxs">
+            {post.likes - post.dislikes}
+          </span>
+          <button onClick={() => likeOrDislikePost(false)}>
+            <DislikeIcon disliked={disliked} />
+          </button>
+        </div>
+        <button
+          className="flex justify-center items-center border border-gray-cardBorder rounded-xl px-2 gap-2 h-7"
+          onClick={() => goToPostCommentsPage(navigate, id)}
+        >
+          <CommentIcon />
           <span className="font-normal text-xxs">{post.comments}</span>
         </button>
       </div>
