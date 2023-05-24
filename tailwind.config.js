@@ -9,6 +9,7 @@ export default {
         mid: "#A3A3A3",
         inputBorder: "#D5D8DE",
         inputText: "#323941",
+        inputPost:"#6F6F6F",
         cardBg: "#FBFBFB",
         cardBorder: "#E0E0E0",
       },

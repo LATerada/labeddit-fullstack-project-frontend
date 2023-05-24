@@ -20,6 +20,7 @@ export const Button = (props) => {
       <button
         className="flex justify-center bg-gradient-to-r from-rose to-orange-border py-3 px-32 w-80 rounded-xl font-noto font-bold text-white"
         type="submit"
+        onClick={onClick}
       >
         {text}
       </button>
