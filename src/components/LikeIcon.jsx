@@ -1,6 +1,6 @@
 export const LikeIcon = (props) => {
   const { liked } = props;
-  console.log(liked);
+  // console.log(liked);
   if (liked) {
     return (
       <svg

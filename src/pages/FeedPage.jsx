@@ -12,7 +12,6 @@ const FeedPage = () => {
   const [isPosting, setIsPosting] = useState(false);
   const [isPostValid, setIsPostValid] = useState(true);
   const [newPost, setNewPost] = useState(false);
-  // const [newLikeOrDislikePost, setNewLikeOrDislikePost] = useState(false);
   const [textAreaErrorMessage, setTextAreaErrorMessage] = useState(
     "Posts need to have at least 1 caracter."
   );
@@ -45,7 +44,8 @@ const FeedPage = () => {
 
     if (/.{1}/.test(form.postContent)) {
       const response = await UserService.createPost(headers, body);
-
+      console.log(response);
+      clearInputs()
       setNewPost(true);
     }
     setIsPosting(false);
@@ -55,16 +55,14 @@ const FeedPage = () => {
     fetchPosts();
   }, [newPost]);
 
-  // console.log(isPostValid);
-
   if (isLoaded) {
     return (
-      <div className="grid justify-center w-full pb-8">
+      <div className="grid justify-items-center content-center w-full pb-8">
         <form onSubmit={onSubmit}>
           <TextArea
             name="postContent"
             type="text"
-            value={form.password}
+            value={form.postContent}
             onChange={onChangeInputs}
             placeholder="Write your post..."
             isValid={isPostValid}
@@ -90,7 +88,6 @@ const FeedPage = () => {
               post={post}
               headers={headers}
               fetchPosts={fetchPosts}
-              // setNewLikeOrDislikePost={setNewLikeOrDislikePost}
             ></PostCard>
           );
         })}
