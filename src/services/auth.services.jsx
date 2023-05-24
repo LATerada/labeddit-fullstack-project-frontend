@@ -34,6 +34,10 @@ const signup = async (body) => {
   return response;
 };
 
-const AuthService = { login, signup };
+const logout = () => {
+  localStorage.removeItem("token")
+}
+
+const AuthService = { login, signup, logout };
 
 export default AuthService;
