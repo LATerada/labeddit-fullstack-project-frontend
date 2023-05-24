@@ -36,6 +36,7 @@ const signup = async (body) => {
 
 const logout = () => {
   localStorage.removeItem("token")
+  return "user logged out"
 }
 
 const AuthService = { login, signup, logout };

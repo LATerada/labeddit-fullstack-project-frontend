@@ -64,8 +64,8 @@ const SignupPage = () => {
 
   return (
     <div className="grid grid-rows-7 items-center bg-white h-[calc(100vh-48px)] w-screen">
-      <div className="font-ibm w-full">
-        <h1 className="justify-self-start pl-10 text-black font-bold text-3xl">
+      <div className=" font-ibm w-full">
+        <h1 className="justify-self-start pl-10 text-black font-ibm font-bold text-3xl">
           {welcomeMessage}
         </h1>
       </div>

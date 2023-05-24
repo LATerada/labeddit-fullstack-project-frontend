@@ -86,7 +86,7 @@ export const PostCard = (props) => {
           <button onClick={() => likeOrDislikePost(true)}>
             <LikeIcon liked={liked} />
           </button>
-          <span className="font-bold text-xxs">
+          <span className="font-bold text-[9.5px] text-gray-inputPost">
             {post.likes - post.dislikes}
           </span>
           <button onClick={() => likeOrDislikePost(false)}>
@@ -98,7 +98,7 @@ export const PostCard = (props) => {
           onClick={() => goToPostCommentsPage(navigate, id)}
         >
           <CommentIcon />
-          <span className="font-normal text-xxs">{post.comments}</span>
+          <span className="font-normal text-[9.5px]">{post.comments}</span>
         </button>
       </div>
     </div>
