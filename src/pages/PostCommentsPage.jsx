@@ -6,8 +6,8 @@ import { TextArea } from "../components/TextArea";
 import { useParams } from "react-router-dom";
 import { CommentCard } from "../components/CommentCard";
 import { PostCard } from "../components/PostCard";
-import UserService from "../services/user.service";
-import ValidationService from "../services/validation.service";
+import UserService from "../services/userService";
+import ValidationService from "../services/validationService";
 
 const PostCommentsPage = () => {
   const [postToRender, setPostTorender] = useState();

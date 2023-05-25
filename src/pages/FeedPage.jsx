@@ -4,8 +4,8 @@ import { PostCard } from "../components/PostCard";
 import { Button } from "../components/Button";
 import { useForm } from "../hooks/useForm";
 import { TextArea } from "../components/TextArea";
-import UserService from "../services/user.service";
-import ValidationService from "../services/validation.service";
+import UserService from "../services/userService";
+import ValidationService from "../services/validationService";
 
 const FeedPage = () => {
   const [posts, setPosts] = useState([]);

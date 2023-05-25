@@ -4,14 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { goToFeedPage, goToLoginPage } from "../routes/coordinator";
 import logo from "../assets/labeddit-logo.svg";
 import closeIcon from "../assets/close.svg";
-import AuthService from "../services/auth.services";
+import AuthService from "../services/authServices";
 
 export const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(GlobalContext);
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (location.pathname === "/login") {
+  if (location.pathname === "/") {
     return <></>;
   }
 

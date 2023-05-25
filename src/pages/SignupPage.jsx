@@ -5,8 +5,8 @@ import { Button } from "../components/Button";
 import { FormInput } from "../components/FormInput";
 import { useForm } from "../hooks/useForm";
 import { goToFeedPage } from "../routes/coordinator";
-import AuthService from "../services/auth.services";
-import ValidationService from "../services/validation.service";
+import AuthService from "../services/authServices";
+import ValidationService from "../services/validationService";
 
 const SignupPage = () => {
   const [isNameValid, setIsNameValid] = useState(true);

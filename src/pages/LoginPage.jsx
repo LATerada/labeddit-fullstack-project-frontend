@@ -6,8 +6,8 @@ import { useForm } from "../hooks/useForm";
 import { goToFeedPage } from "../routes/coordinator";
 import { GlobalContext } from "../contexts/GlobalContext";
 import logo from "../assets/labeddit-logo.svg";
-import AuthService from "../services/auth.services";
-import ValidationService from "../services/validation.service";
+import AuthService from "../services/authServices";
+import ValidationService from "../services/validationService";
 
 const LoginPage = () => {
   const { setIsLoggedIn } = useContext(GlobalContext);
