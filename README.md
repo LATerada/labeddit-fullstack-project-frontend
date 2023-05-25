@@ -19,10 +19,12 @@ The project was developed from the creation of a Login, Signup, Feed and Post's 
 
 
 ## 💻 Layout
+<div class="fex">
 <img src="./src/assets/loginPage.png" width="200"  />
 <img src="./src/assets/signupPage.png" width="200"  />
 <img src="./src/assets/feedPage.png" width="200"  />
 <img src="./src/assets/postcommentsPage.png" width="200"  />
+</div>
 
 
 ## 💿 Demonstration
