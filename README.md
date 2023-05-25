@@ -11,12 +11,12 @@ The project was developed from the creation of a Login, Signup, Feed and Post's 
 🚩 [Labeddit FullStack Project - Backend](https://github.com/LATerada/labeddit-fullstack-project-backend)
 
 
-
 ## 📱 Project Funcionalities
 * Login Page
 * Signup Page
 * Feed Page
 * Post's comments Page
+
 
 ## 💻 Layout
 <img src="./src/assets/loginPage.png" width="200"  />
@@ -44,6 +44,7 @@ $ npm install
 $ npm run dev
 ```
 
+
 ## 📚 Technologies Used
 1. [React](https://pt-br.reactjs.org/)
 2. [React Router](https://reactrouter.com/en/main)
@@ -51,6 +52,6 @@ $ npm run dev
 4. [Global Context](https://pt-br.reactjs.org/docs/context.html)
 5. [Axios](https://axios-http.com/docs/intro)
 
-##  🙋‍♀️ About Creator
 
+##  🙋‍♀️ About Creator
 [Larissa's Linkedin](https://www.linkedin.com/in/larissa-terada/)
