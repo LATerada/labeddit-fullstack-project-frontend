@@ -3,11 +3,12 @@ import { useEffect } from "react";
 import { Button } from "../components/Button";
 import { useForm } from "../hooks/useForm";
 import { TextArea } from "../components/TextArea";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CommentCard } from "../components/CommentCard";
 import { PostCard } from "../components/PostCard";
 import UserService from "../services/userService";
 import ValidationService from "../services/validationService";
+import { goToLoginPage } from "../routes/coordinator";
 
 const PostCommentsPage = () => {
   const [postToRender, setPostTorender] = useState();
@@ -21,7 +22,12 @@ const PostCommentsPage = () => {
 
   let { id } = useParams();
 
+  const navigate = useNavigate()
+
   const token = localStorage.getItem("token");
+  if(!token){
+    goToLoginPage(navigate)
+  }
   const headers = {
     headers: {
       Authorization: token,

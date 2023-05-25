@@ -6,6 +6,8 @@ import { useForm } from "../hooks/useForm";
 import { TextArea } from "../components/TextArea";
 import UserService from "../services/userService";
 import ValidationService from "../services/validationService";
+import { goToLoginPage } from "../routes/coordinator";
+import { useNavigate } from "react-router-dom";
 
 const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -15,7 +17,11 @@ const FeedPage = () => {
   const [newPost, setNewPost] = useState(false);
   const textAreaErrorMessage =  "Posts need to have at least 1 caracter."
  
+  const navigate = useNavigate()
   const token = localStorage.getItem("token");
+  if(!token){
+    goToLoginPage(navigate)
+  }
   const headers = {
     headers: {
       Authorization: token,
