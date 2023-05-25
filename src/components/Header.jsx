@@ -4,19 +4,25 @@ import closeIcon from "../assets/close.svg";
 import { goToFeedPage, goToLoginPage } from "../routes/coordinator";
 import AuthService from "../services/auth.services";
 
-export const Header = () => {
+export const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
- 
+
   if (location.pathname === "/login") {
     return <></>;
   }
 
-  const logout = () => {
-    const response = AuthService.logout();
-    console.log(response);
-    goToLoginPage(navigate);
+  const buttonAction = () => {
+    if (isLoggedIn) {
+      AuthService.logout();
+      setIsLoggedIn(false);
+      goToLoginPage(navigate);
+    } else {
+      goToLoginPage(navigate);
+    }
   };
+
+  const buttonText = isLoggedIn ? "Logout" : "Login";
 
   return (
     <div className="grid grid-cols-3 items-center bg-gray-header h-12">
@@ -35,21 +41,12 @@ export const Header = () => {
         src={logo}
         alt="logo"
       />
-      {!location.pathname.includes("signup") ? (
-        <button
-          className="pl-7 text-blue font-noto font-semibold"
-          onClick={logout}
-        >
-          Logout
-        </button>
-      ) : (
-        <button
-          className="pl-7 text-blue font-noto font-semibold"
-          onClick={() => goToLoginPage(navigate)}
-        >
-          Login
-        </button>
-      )}
+      <button
+        className="pl-7 text-blue font-noto font-semibold"
+        onClick={buttonAction}
+      >
+        {buttonText}
+      </button>
     </div>
   );
 };
