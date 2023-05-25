@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { PostCard } from "../components/PostCard";
-import UserService from "../services/user.service";
 import { Button } from "../components/Button";
 import { useForm } from "../hooks/useForm";
 import { TextArea } from "../components/TextArea";
+import UserService from "../services/user.service";
+import ValidationService from "../services/validation.service";
 
 const FeedPage = () => {
   const [posts, setPosts] = useState([]);
@@ -12,11 +13,9 @@ const FeedPage = () => {
   const [isPosting, setIsPosting] = useState(false);
   const [isPostValid, setIsPostValid] = useState(true);
   const [newPost, setNewPost] = useState(false);
-  const [textAreaErrorMessage, setTextAreaErrorMessage] = useState(
-    "Posts need to have at least 1 caracter."
-  );
+  const textAreaErrorMessage =  "Posts need to have at least 1 caracter."
+ 
   const token = localStorage.getItem("token");
-  localStorage.getItem("token");
   const headers = {
     headers: {
       Authorization: token,
@@ -40,12 +39,11 @@ const FeedPage = () => {
     setIsPosting(true);
     event.preventDefault();
 
-    setIsPostValid(/.{1}/.test(form.postContent));
+    setIsPostValid(ValidationService.postValidation(form.postContent));
 
-    if (/.{1}/.test(form.postContent)) {
-      const response = await UserService.createPost(headers, body);
-      console.log(response);
-      clearInputs()
+    if (ValidationService.postValidation(form.postContent)) {
+      await UserService.createPost(headers, body);
+      clearInputs();
       setNewPost(true);
     }
     setIsPosting(false);

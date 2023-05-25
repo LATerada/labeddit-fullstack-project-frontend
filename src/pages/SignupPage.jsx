@@ -22,6 +22,7 @@ const SignupPage = () => {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(
     "Please insert at least 6 caracters."
   );
+  const welcomeMessage = "Hello, welcome to LabEddit ;)";
 
   const navigate = useNavigate();
 
@@ -61,8 +62,6 @@ const SignupPage = () => {
     }
     setIsLoading(false);
   };
-
-  const welcomeMessage = "Hello, welcome to LabEddit ;)";
 
   return (
     <div className="grid grid-rows-7 items-center bg-white h-[calc(100vh-48px)] w-screen">

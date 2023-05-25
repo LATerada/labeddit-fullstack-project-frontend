@@ -10,10 +10,15 @@ const nameValidation = (name) => {
   return /.{2,}/.test(name);
 };
 
+const postValidation = (post)=>{
+  return /.{1}/.test(post)
+}
+
 const ValidationService = {
   emailValidation,
   passwordValidation,
   nameValidation,
+  postValidation
 };
 
 export default ValidationService;

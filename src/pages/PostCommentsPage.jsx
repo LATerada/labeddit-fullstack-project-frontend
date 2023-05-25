@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import UserService from "../services/user.service";
 import { Button } from "../components/Button";
 import { useForm } from "../hooks/useForm";
 import { TextArea } from "../components/TextArea";
 import { useParams } from "react-router-dom";
 import { CommentCard } from "../components/CommentCard";
 import { PostCard } from "../components/PostCard";
+import UserService from "../services/user.service";
+import ValidationService from "../services/validation.service";
 
 const PostCommentsPage = () => {
   const [postToRender, setPostTorender] = useState();
@@ -16,12 +17,11 @@ const PostCommentsPage = () => {
   const [isPosting, setIsPosting] = useState(false);
   const [isCommentValid, setIsCommentValid] = useState(true);
   const [newComment, setNewComment] = useState(false);
-  const [textAreaErrorMessage, setTextAreaErrorMessage] = useState(
-    "Comments need to have at least 1 caracter."
-  );
-  const token = localStorage.getItem("token");
+  const textAreaErrorMessage = "Comments need to have at least 1 caracter."
+
   let { id } = useParams();
-  localStorage.getItem("token");
+
+  const token = localStorage.getItem("token");
   const headers = {
     headers: {
       Authorization: token,
@@ -40,12 +40,11 @@ const PostCommentsPage = () => {
     setPosts(response);
     const postToRender = response.find((post) => post.id === id);
     setPostTorender(postToRender);
-    console.log(postToRender);
     setIsLoaded(true);
   };
+
   const fetchComments = async () => {
     const response = await UserService.getCommentsByPostId(headers, id);
-    console.log(response);
     setComments(response);
   };
 
@@ -53,16 +52,11 @@ const PostCommentsPage = () => {
     setIsPosting(true);
     event.preventDefault();
 
-    setIsCommentValid(/.{1}/.test(form.commentContent));
+    setIsCommentValid(ValidationService.postValidation(form.commentContent));
 
-    if (/.{1}/.test(form.commentContent)) {
-      const response = await UserService.createComment(
-        headers,
-        body,
-        postToRender.id
-      );
-      console.log(response);
-      clearInputs()
+    if (ValidationService.postValidation(form.commentContent)) {
+      await UserService.createComment(headers, body, postToRender.id);
+      clearInputs();
       setNewComment(true);
     }
     setIsPosting(false);
