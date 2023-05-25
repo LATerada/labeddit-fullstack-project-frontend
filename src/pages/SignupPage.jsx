@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AgreementTerms } from "../components/AgreementTerms";
 import { Button } from "../components/Button";
 import { FormInput } from "../components/FormInput";
 import { useForm } from "../hooks/useForm";
 import { goToFeedPage } from "../routes/coordinator";
 import AuthService from "../services/auth.services";
+import ValidationService from "../services/validation.service";
 
 const SignupPage = () => {
   const [isNameValid, setIsNameValid] = useState(true);
@@ -22,6 +24,7 @@ const SignupPage = () => {
   );
 
   const navigate = useNavigate();
+
   const { form, onChangeInputs, clearInputs } = useForm({
     name: "",
     email: "",
@@ -36,16 +39,15 @@ const SignupPage = () => {
   const onSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
-    console.log(form);
 
-    setIsNameValid(/.{2,}/.test(form.name));
-    setIsEmailValid(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email));
-    setIsPasswordValid(/^[0-9a-zA-Z$*&@#]{6,}$/.test(form.password));
+    setIsNameValid(ValidationService.nameValidation(form.name));
+    setIsEmailValid(ValidationService.emailValidation(form.email));
+    setIsPasswordValid(ValidationService.passwordValidation(form.password));
 
     if (
-      /.{2,}/.test(form.name) &&
-      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email) &&
-      /^[0-9a-zA-Z$*&@#]{6,}$/.test(form.password)
+      ValidationService.nameValidation(form.name) &&
+      ValidationService.emailValidation(form.email) &&
+      ValidationService.passwordValidation(form.password)
     ) {
       const respose = await AuthService.signup(body);
       if (respose.status === 409) {
@@ -70,7 +72,7 @@ const SignupPage = () => {
         </h1>
       </div>
       <div className=" row-start-3 flex flex-wrap justify-self-center justify-center pb-16">
-        <form onSubmit={onSubmit} className="grid justify-center w-full">
+        <form onSubmit={onSubmit} className="grid justify-center w-full pb-2">
           <FormInput
             placeholder="Username"
             name="name"
@@ -111,48 +113,7 @@ const SignupPage = () => {
             <p className="mb-2 text-red">{passwordErrorMessage}</p>
           )}
         </form>
-
-        {!isNameValid || !isEmailValid || !isPasswordValid ? (
-          <div className=" row-start-2 w-full px-10  font-noto text-xs">
-            <p className=" font-medium pb-2">
-              By continuing, you agree to our{" "}
-              <span className=" text-blue">User Agreement</span> and{" "}
-              <span className=" text-blue">Privacy Policy</span>
-            </p>
-            <div className=" flex gap-2">
-              {" "}
-              <input
-                className=" font-semibold py-2"
-                name="agree newsletter"
-                type="checkbox"
-                id="agree newsletter"
-              ></input>
-              <label id="agree newsletter">
-                I agree to receive emails about cool stuff on Labeddit
-              </label>
-            </div>
-          </div>
-        ) : (
-          <div className=" w-full px-10 pt-2 font-noto text-xs">
-            <p className=" font-medium pb-2">
-              By continuing, you agree to our{" "}
-              <span className=" text-blue">User Agreement</span> and{" "}
-              <span className=" text-blue">Privacy Policy</span>
-            </p>
-            <div className=" flex gap-2">
-              {" "}
-              <input
-                className=" font-semibold py-2"
-                name="agree newsletter"
-                type="checkbox"
-                id="agree newsletter"
-              ></input>
-              <label id="agree newsletter">
-                I agree to receive emails about cool stuff on Labeddit
-              </label>
-            </div>
-          </div>
-        )}
+        <AgreementTerms />
         <div className="w-screen flex justify-center pt-4">
           {" "}
           <Button

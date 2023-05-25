@@ -6,8 +6,9 @@ import { useForm } from "../hooks/useForm";
 import logo from "../assets/labeddit-logo.svg";
 import AuthService from "../services/auth.services";
 import { goToFeedPage } from "../routes/coordinator";
+import ValidationService from "../services/validation.service";
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,7 @@ const LoginPage = () => {
   );
 
   const navigate = useNavigate();
+
   const { form, onChangeInputs, clearInputs } = useForm({
     email: "",
     password: "",
@@ -31,14 +33,13 @@ const LoginPage = () => {
   const onSubmit = async (event) => {
     setIsLoading(true);
     event.preventDefault();
-    console.log(form);
 
-    setIsEmailValid(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email));
-    setIsPasswordValid(/^[0-9a-zA-Z$*&@#]{6,}$/.test(form.password));
+    setIsEmailValid(ValidationService.emailValidation(form.email));
+    setIsPasswordValid(ValidationService.passwordValidation(form.password));
 
     if (
-      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email) &&
-      /^[0-9a-zA-Z$*&@#]{6,}$/.test(form.password)
+      ValidationService.emailValidation(form.email) &&
+      ValidationService.passwordValidation(form.password)
     ) {
       const respose = await AuthService.login(body);
 
@@ -49,6 +50,7 @@ const LoginPage = () => {
         setPasswordErrorMessage("Email or password invalid");
         setIsLoading(false);
       } else if (respose.status === 200) {
+        setIsLoggedIn(true);
         setIsLoading(false);
         clearInputs();
         goToFeedPage(navigate);
@@ -95,30 +97,16 @@ const LoginPage = () => {
             <p className="w-72 mb-2 text-red">{passwordErrorMessage}</p>
           )}
         </form>
-        {!isEmailValid || !isPasswordValid ? (
-          <div className="w-screen flex justify-center pt-2">
-            {" "}
-            <Button
-              type="submit"
-              text={isLoading ? "Loading..." : "Login"}
-              round={"rounded-full"}
-              bg={"gradient"}
-              onClick={onSubmit}
-            ></Button>
-          </div>
-        ) : (
-          <div className="w-screen flex justify-center pt-10">
-            {" "}
-            <Button
-              type="submit"
-              text={isLoading ? "Loading..." : "Login"}
-              round={"rounded-full"}
-              bg={"gradient"}
-              onClick={onSubmit}
-            ></Button>
-          </div>
-        )}
-
+        <div className="w-screen flex justify-center pt-2">
+          {" "}
+          <Button
+            type="submit"
+            text={isLoading ? "Loading..." : "Login"}
+            round={"rounded-full"}
+            bg={"gradient"}
+            onClick={onSubmit}
+          ></Button>
+        </div>
         <div className=" bg-gradient-to-r from-rose to-orange-border w-80 h-px my-4"></div>
         <div className="w-screen flex justify-center">
           <Button text={"Signup!"} round={"rounded-full"} bg={"null"}>
