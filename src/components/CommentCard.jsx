@@ -1,8 +1,8 @@
 import { LikeIcon } from "./LikeIcon";
 import { DislikeIcon } from "./DislikeIcon";
-import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import UserService from "../services/userService";
 
 export const CommentCard = (props) => {
   const { comment, headers, fetchComments } = props;
