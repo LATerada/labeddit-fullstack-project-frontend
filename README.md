@@ -28,7 +28,7 @@ The project was developed from the creation of a Login, Signup, Feed and Post's 
 
 
 ## 💿 Demonstration
-![Demonstration Link](./assets/labeddit-database.png)
+![Demonstration Link](https://labeddit-LATerada.surge.sh)
 
 
 ## 📝 How to Install and Run the Project
