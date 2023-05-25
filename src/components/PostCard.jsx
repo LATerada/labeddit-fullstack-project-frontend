@@ -1,10 +1,10 @@
 import { LikeIcon } from "./LikeIcon";
 import { DislikeIcon } from "./DislikeIcon";
 import { CommentIcon } from "./CommentIcon";
-import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { goToPostCommentsPage } from "../routes/coordinator";
 import { useState } from "react";
+import UserService from "../services/userService";
 
 export const PostCard = (props) => {
   const { post, headers, fetchPosts} = props;
