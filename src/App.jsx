@@ -1,10 +1,11 @@
+import GlobalContextProvider from "./contexts/GlobalContext";
 import Router from "./routes/Router";
 
 const App = () => {
   return (
-    <div>
+    <GlobalContextProvider>
       <Router />
-    </div>
+    </GlobalContextProvider>
   );
 };
 export default App;
