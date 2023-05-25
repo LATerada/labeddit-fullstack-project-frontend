@@ -1,6 +1,6 @@
 export const LikeIcon = (props) => {
   const { liked } = props;
-  // console.log(liked);
+
   if (liked) {
     return (
       <svg
@@ -8,7 +8,6 @@ export const LikeIcon = (props) => {
         width="15"
         height="17"
         viewBox="0 0 15 17"
-        // fill="current"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -23,7 +22,6 @@ export const LikeIcon = (props) => {
         width="15"
         height="17"
         viewBox="0 0 15 17"
-        // fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className=" active:stroke-red active:stroke-2"
       >

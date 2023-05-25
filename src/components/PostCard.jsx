@@ -10,7 +10,6 @@ export const PostCard = (props) => {
   const { post, headers, fetchPosts} = props;
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  // const [interactedPosts, setInteractedPosts] = useState([]);
   const id = post.id;
   const navigate = useNavigate();
 
@@ -29,48 +28,8 @@ export const PostCard = (props) => {
     if(response.status === 200){
       fetchPosts()
     }
-    // if (response.status === 200) {
-    //   const alreadyInteract = interactedPosts.find(
-    //     (interactedPost) => interactedPost.postId === id
-    //   );
 
-    //   if (like === true) {
-    //     if (alreadyInteract) {
-    //       if (alreadyInteract.like === true) {
-    //         setLiked(false);
-    //       } else {
-    //         setDisliked(false);
-    //         setLiked(true);
-    //       }
-    //     } else {
-    //       console.log("chegou aqui");
-    //       const newInteractedPosts = [...interactedPosts];
-    //       newInteractedPosts.push(likeOrDislikePost);
-    //       setInteractedPosts(newInteractedPosts);
-    //       console.log(interactedPosts);
-    //       setLiked(true);
-    //     }
-    //   } else if (like === false) {
-    //     if (alreadyInteract) {
-    //       if (alreadyInteract.like === true) {
-    //         setLiked(false);
-    //         setDisliked(true);
-    //       } else {
-    //         setDisliked(false);
-    //       }
-    //     } else {
-    //       const newInteractedPosts = [...interactedPosts];
-    //       newInteractedPosts.push(likeOrDislikePost);
-    //       setInteractedPosts(newInteractedPosts);
-    //       setDisliked(true);
-    //     }
-    //   }
-    //   setNewLikeOrDislikePost(true);
-    // }
   };
-
-
-  // useEffect(() => {}, [liked, disliked]);
 
   return (
     <div className="w-80 grid  border-gray-cardBorder border bg-gray-cardBg m-1.5 font-ibm px-2.5 py-2 rounded-xl">
