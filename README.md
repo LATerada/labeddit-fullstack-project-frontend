@@ -54,6 +54,12 @@ $ npm run dev
 4. [Global Context](https://pt-br.reactjs.org/docs/context.html)
 5. [Axios](https://axios-http.com/docs/intro)
 
+## ⏭️ What next?
+Even though all the projects requirements are in the project, I wish to implement a couple of things as:
+* Add different aspect to a liked or disliked button;
+* Add how long that posts and comments were created;
+* Add order to posts by most liked ones instead of "created at" order;
+
 
 ##  🙋‍♀️ About Creator
 [Larissa's Linkedin](https://www.linkedin.com/in/larissa-terada/)
